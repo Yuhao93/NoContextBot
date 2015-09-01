@@ -29,6 +29,8 @@ def init():
   return r
 
 def refresh_praw(praw_instance):
-  praw_instance.set_access_credentials(set(["submit"]), get_access_token())
+  praw_instance.set_access_credentials(set([
+    "submit", "identity"]), get_access_token())
 
-
+def my_id(r):
+  return r.get_me().id

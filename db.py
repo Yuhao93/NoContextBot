@@ -15,17 +15,19 @@ db.authenticate(username, password)
 collection = db['comments']
 
 def insert_if_not_exists(comment_id, text):
-  post = {
-    "comment_id": comment_id,
-    "text": text
-  }
-  document = collection.find_one({ "comment_id": comment_id })
-  if not document is None:
-    collection.insert(post)
+  if not exists(comment_id):
+    collection.insert({
+      "comment_id": comment_id,
+      "text": text
+    })
 
-  
+def exists(comment_id):
+  return not collection.find_one({ "comment_id": comment_id}) is None
 
-
+def random_comment():
+  cnt = collection.count()
+  randomNumber = random.randint(0, cnt - 1)
+  return collection.find().limit(-1).skip(randomNumber).next()
 
 
 
