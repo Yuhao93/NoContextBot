@@ -5,10 +5,11 @@ import praw
 with open('comment_template.txt') as f:
   comment_template = f.read()
 
-def reply(comment):
+def reply(r, comment):
   random_comment = db.random_comment()
-  text = comment_template.format(random_comment.text,
-      random_comment.comment_id)
+  thing_id = "t1_" + random_comment.comment_id
+  url = r.get_info(thing_id=thing_id).permalink
+  text = comment_template.format(random_comment.text, url)
   print '[posting] ' + text
   new_comment = comment.reply(text)
   db.insert_if_not_exists(new_comment.id, new_comment.text)
