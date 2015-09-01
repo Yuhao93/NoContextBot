@@ -16,7 +16,7 @@ collection = db['comments']
 
 def insert_if_not_exists(comment_id, text):
   if not exists(comment_id):
-    collection.insert({
+    collection.insert_one({
       "comment_id": comment_id,
       "text": text
     })
