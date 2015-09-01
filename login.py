@@ -19,6 +19,9 @@ def get_access_token():
   response_obj = response.json()
   return response_obj['access_token']  
 
+def unauthorized_init():
+  return praw.Reddit(user_agent)
+
 def init():
   r = praw.Reddit(user_agent)
   r.set_oauth_app_info(
