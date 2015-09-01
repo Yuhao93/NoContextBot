@@ -17,14 +17,12 @@ def run():
   no_context = [ '/r/nocontext' ]
   r = login.init()
   my_id = login.my_id(r)
-  while True:
-    login.refresh_praw(r)
-    for comment in r.get_comments('all'):
-      text = ''.join(comment.body).encode('utf-8').lower().strip()
-      if not comment.is_root
-          and text in no_context
-          and not db.exists(comment.id)
-          and not comment.author.id == my_id:
-        reply(comment)
-
+  for comment in praw.helpers.comment_stream(r, 'all', verbosity=0):
+    text = ''.join(comment.body).encode('utf-8').lower().strip()
+    if not comment.is_root
+        and text in no_context
+        and not db.exists(comment.id)
+        and not comment.author.id == my_id:
+      login.refresh_praw(r)
+      reply(comment)
 run()
