@@ -6,4 +6,4 @@ Speaking of no context:
 
 &nbsp;
 
-[What's the context here?](https://www.reddit.com/comments/{1}/)
+[What's the context here?]({1})
