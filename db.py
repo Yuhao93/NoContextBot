@@ -1,9 +1,17 @@
+import json
 from pymongo import MongoClient
 
-with open('mongo_login.txt') as f:
-  login_url = f.read()
-client = MongoClient(login_url)
-db = client['no_context_posts']
+with open('credentials/mongo.json') as f:
+  json_login = json.load(f)
+  username = json_login['username']
+  password = json_login['password']
+  url = json_login['url']
+  port = json_login['port']
+  db = json_login['db']
+
+client = MongoClient(url, port)
+db = client[db]
+db.authenticate(username, password)
 collection = db['comments']
 
 def insert_if_not_exists(comment_id, text):

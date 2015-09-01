@@ -1,4 +1,2 @@
 *.pyc
-mongo_login.txt
-client.json
-login.json
+credentials/*.json

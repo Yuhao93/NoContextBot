@@ -4,14 +4,14 @@ import requests
 import requests.auth
 
 user_agent = "I make comments with no context!"
-with open('client.json') as f:
+with open('credentials/client.json') as f:
   client_json = json.load(f)
   client_id = client_json['client-id']
   client_secret = client_json['secret']
 
 def get_access_token():
   client_auth = requests.auth.HTTPBasicAuth(client_id, client_secret)
-  with open('login.json') as login:
+  with open('credentials/login.json') as login:
     post_data = json.load(login)
   headers = { "User-Agent": user_agent }
   response = requests.post("https://www.reddit.com/api/v1/access_token", 
