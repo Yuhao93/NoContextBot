@@ -15,6 +15,7 @@ def run():
         if parent.author.id == my_id:
           continue
         parent_text = ''.join(parent.body).encode('utf-8')
+        print '[adding] ' + parent_text
         db.insert_if_not_exists(parent.id, parent_text)
 
 run()

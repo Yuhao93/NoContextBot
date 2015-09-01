@@ -7,12 +7,14 @@ with open('comment_template.txt') as f:
 
 def reply(comment):
   random_comment = db.random_comment()
-  new_comment = comment.reply(comment_template.format(random_comment.text,
-      random_comment.comment_id))
+  text = comment_template.format(random_comment.text,
+      random_comment.comment_id)
+  print '[posting] ' + text
+  new_comment = comment.reply(text)
   db.insert_if_not_exists(new_comment.id, new_comment.text)
 
 def run():
-  no_context = [ 'r/nocontext', '/r/nocontext' ]
+  no_context = [ '/r/nocontext' ]
   r = login.init()
   my_id = login.my_id(r)
   while True:
