@@ -1,4 +1,5 @@
 import json
+import random
 from pymongo import MongoClient
 
 with open('credentials/mongo.json') as f:
