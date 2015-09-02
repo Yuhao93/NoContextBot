@@ -25,9 +25,9 @@ def run():
     try:
       for comment in praw.helpers.comment_stream(r, 'all', verbosity=0):
         text = ''.join(comment.body).encode('utf-8').lower().strip()
-        if not comment.is_root
-            and text in no_context
-            and not db.has_replied(comment.id) 
+        if not comment.is_root \
+            and text in no_context \
+            and not db.has_replied(comment.id) \
             and not comment.author.id == my_id:
           db.reply(comment.id)
           login.refresh_praw(r)
