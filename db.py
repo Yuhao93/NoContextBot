@@ -13,6 +13,7 @@ client = MongoClient(url, port)
 db = client[db]
 db.authenticate(username, password)
 collection = db['comments']
+replies = db['replied']
 
 def insert_if_not_exists(comment_id, text):
   if not exists(comment_id):
@@ -21,8 +22,18 @@ def insert_if_not_exists(comment_id, text):
       "text": text
     })
 
+def reply(comment_id):
+  replies.insert_one({
+    "comment_id": comment_id  
+  })
+
+def has_replied(comment_id):
+  return not replies.find_one({
+    "comment_id": comment_id
+  })
+
 def exists(comment_id):
-  return not collection.find_one({ "comment_id": comment_id}) is None
+  return not collection.find_one({ "comment_id": comment_id }) is None
 
 def random_comment():
   cnt = collection.count()

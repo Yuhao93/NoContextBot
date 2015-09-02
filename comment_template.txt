@@ -1,9 +1,5 @@
 Speaking of no context:
 
-&nbsp;
-
 {0}
 
-&nbsp;
-
-[What's the context here?]({1})
+[What's the context?]({1})

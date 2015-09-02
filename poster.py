@@ -5,6 +5,9 @@ import praw
 with open('comment_template.txt') as f:
   comment_template = f.read()
 
+def wrap_comment(text):
+  return '>' + '\n>'.join(text.split_lines())
+  
 def reply(r, comment):
   random_comment = db.random_comment()
   thing_id = "t1_" + random_comment.comment_id
@@ -24,8 +27,9 @@ def run():
         text = ''.join(comment.body).encode('utf-8').lower().strip()
         if not comment.is_root
             and text in no_context
-            and not db.exists(comment.id)
+            and not db.has_replied(comment.id) 
             and not comment.author.id == my_id:
+          db.reply(comment.id)
           login.refresh_praw(r)
           reply(comment)
     except praw.errors.OAuthInvalidToken:
