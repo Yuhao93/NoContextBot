@@ -13,7 +13,6 @@ def wrap_comment(text):
   
 def reply(r, comment):
   random_comment = db.random_comment()
-  print random_comment
   thing_id = "t1_" + random_comment['comment_id']
   url = r.get_info(thing_id=thing_id).permalink
   text = comment_template.format(wrap_comment(random_comment['text']), url)
@@ -28,7 +27,7 @@ def run():
     while True:
       try:
         for comment in praw.helpers.comment_stream(r, 'all', verbosity=0):
-          text = txt(comment.body).lower().strip()
+          text = txt(comment).lower().strip()
           if text in no_context \
               and not comment.is_root \
               and not db.has_replied(comment.id) \
@@ -39,5 +38,5 @@ def run():
       except praw.errors.OAuthInvalidToken:
         login.refresh_praw(r)
   except:
-    print '[post] error'
+    print '[posting] error'
 run()
