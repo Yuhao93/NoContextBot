@@ -22,4 +22,6 @@ def run():
         login.refresh_praw(r) 
   except:
     print '[crawl] error'
-run()
+
+while True:
+  run()

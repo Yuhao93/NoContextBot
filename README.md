@@ -22,14 +22,14 @@ Running the bot is simple:
 
 
 ```
-./run
+./start.sh
 ```
 
 
-I run the bot on aws using the following command to ensure that it restarts
-when on crashes and continues running even when I log out:
+I run the bot on aws using the following command to ensure that it continues
+running even when I log out:
 
 
 ```
-nohup supervise . &
+nohup ./start.sh &
 ```

@@ -2,8 +2,7 @@ Speaking of no context:
 
 {0}
 
-[What's the context?]({1})
+[What's the context?]({1})|
+[Send me a message!](https://www.reddit.com/message/compose/?to=no_context_bot)|
+[More](http://nocontextbot.herokuapp.com)
 
-&nbsp;
-
-^[Send me a message!](https://www.reddit.com/message/compose/?to=no_context_bot)

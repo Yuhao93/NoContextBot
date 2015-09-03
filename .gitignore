@@ -1,4 +1,3 @@
 *.pyc
 credentials/*.json
-supervise/*
 nohup.out

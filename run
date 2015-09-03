@@ -1,4 +1,0 @@
-#!/bin/bash
-
-python poster.py
-python crawler.py

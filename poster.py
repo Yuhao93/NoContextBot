@@ -1,12 +1,10 @@
 import db
 import login
 import praw
+import util
 
 with open('comment_template.txt') as f:
   comment_template = f.read()
-
-def txt(comment):
-  return ''.join(comment.body).encode('utf-8')
 
 def wrap_comment(text):
   return '>' + '\n>'.join(text.splitlines())
@@ -14,7 +12,7 @@ def wrap_comment(text):
 def reply(r, comment):
   random_comment = db.random_comment()
   thing_id = "t1_" + random_comment['comment_id']
-  url = r.get_info(thing_id=thing_id).parent.permalink
+  url = util.parent(r, r.get_info(thing_id=thing_id)).permalink
   text = comment_template.format(wrap_comment(random_comment['text']), url)
   print '[posting] ' + text
   comment.reply(text)
@@ -27,7 +25,7 @@ def run():
     while True:
       try:
         for comment in praw.helpers.comment_stream(r, 'all', verbosity=0):
-          text = txt(comment).lower().strip()
+          text = util.txt(comment).lower().strip()
           if text in no_context \
               and not comment.is_root \
               and not db.has_replied(comment.id) \
@@ -39,4 +37,6 @@ def run():
         login.refresh_praw(r)
   except:
     print '[posting] error'
-run()
+
+while True:
+  run()
