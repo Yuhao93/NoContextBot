@@ -20,11 +20,15 @@ def reply(r, comment):
 def run():
   try:
     no_context = [ '/r/nocontext' ]
+    banned_subreddits = [ 'wishlist' ]
     r = login.init()
     my_id = login.my_id(r)
     while True:
       try:
         for comment in praw.helpers.comment_stream(r, 'all', verbosity=0):
+          subreddit = comment.subreddit.display_name.lower()
+          if subreddt in banned_subreddits:
+            continue
           text = util.txt(comment).lower().strip()
           if text in no_context \
               and not comment.is_root \
