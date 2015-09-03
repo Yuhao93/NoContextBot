@@ -26,10 +26,5 @@ Running the bot is simple:
 ```
 
 
-I run the bot on aws using the following command to ensure that it continues
-running even when I log out:
+start.sh uses nohup to execute both parts in the background.
 
-
-```
-nohup ./start.sh &
-```
