@@ -8,10 +8,10 @@ with open('credentials/mongo.json') as f:
   password = json_login['password']
   url = json_login['url']
   port = json_login['port']
-  db = json_login['db']
+  db_name = json_login['db']
 
 client = MongoClient(url, port)
-db = client[db]
+db = client[db_name]
 db.authenticate(username, password)
 collection = db['comments']
 replies = db['replies']
