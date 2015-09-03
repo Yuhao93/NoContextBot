@@ -14,7 +14,7 @@ def wrap_comment(text):
 def reply(r, comment):
   random_comment = db.random_comment()
   thing_id = "t1_" + random_comment['comment_id']
-  url = r.get_info(thing_id=thing_id).permalink
+  url = r.get_info(thing_id=thing_id).parent.permalink
   text = comment_template.format(wrap_comment(random_comment['text']), url)
   print '[posting] ' + text
   comment.reply(text)
