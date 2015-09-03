@@ -28,8 +28,7 @@ def run():
           text = util.txt(comment).lower().strip()
           if text in no_context \
               and not comment.is_root \
-              and not db.has_replied(comment.id) \
-              and not comment.author.id == my_id:
+              and not db.has_replied(comment.id):
             db.reply(comment.id)
             login.refresh_praw(r)
             reply(r, comment)
