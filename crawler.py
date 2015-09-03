@@ -1,6 +1,7 @@
 import db
 import login
 import praw
+import util
 
 def run():
   try:
@@ -10,9 +11,9 @@ def run():
     while True:
       try:
         for comment in praw.helpers.comment_stream(r, 'all', verbosity=0):
-          text = ''.join(comment.body).encode('utf-8').lower().strip()
+          text = util.txt(comment).lower().strip()
           if not comment.is_root and text in no_context:
-            parent = r.get_info(thing_id=comment.parent_id)
+            parent = util.parent(r, comment)
             if parent.author.id == my_id:
               continue
             parent_text = ''.join(parent.body).encode('utf-8')
