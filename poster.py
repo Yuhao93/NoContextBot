@@ -5,7 +5,7 @@ import praw
 with open('comment_template.txt') as f:
   comment_template = f.read()
 
-def text(comment):
+def txt(comment):
   return ''.join(comment.body).encode('utf-8')
 
 def wrap_comment(text):
@@ -27,7 +27,7 @@ def run():
   while True:
     try:
       for comment in praw.helpers.comment_stream(r, 'all', verbosity=0):
-        text = text(comment.body).lower().strip()
+        text = txt(comment.body).lower().strip()
         if text in no_context \
             and not comment.is_root \
             and not db.has_replied(comment.id) \
