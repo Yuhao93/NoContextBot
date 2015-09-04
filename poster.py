@@ -11,6 +11,8 @@ def wrap_comment(text):
   
 def reply(r, comment):
   random_comment = db.random_comment()
+  while random_comment['comment_id'] == util.parent(r, comment).id:
+    random_comment = db.random_comment()
   thing_id = "t1_" + random_comment['comment_id']
   url = util.parent(r, r.get_info(thing_id=thing_id)).permalink
   text = comment_template.format(wrap_comment(random_comment['text']), url)
