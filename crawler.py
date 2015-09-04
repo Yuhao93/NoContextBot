@@ -1,6 +1,7 @@
 import db
 import login
 import praw
+import sys
 import util
 
 def run():
@@ -22,4 +23,7 @@ def run():
       login.refresh_praw(r) 
 
 while True:
-  run()
+  try:
+    run()
+  except:
+    print '[crawler] ', sys.exec_info()[0]

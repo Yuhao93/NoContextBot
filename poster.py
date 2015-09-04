@@ -1,7 +1,9 @@
 import db
 import login
 import praw
+import sys
 import util
+
 
 with open('comment_template.txt') as f:
   comment_template = f.read()
@@ -41,4 +43,7 @@ def run():
       login.refresh_praw(r)
 
 while True:
-  run()
+  try:
+    run()
+  except:
+    print '[posting] ', sys.exec_info()[0]
