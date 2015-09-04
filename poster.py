@@ -4,7 +4,6 @@ import praw
 import sys
 import util
 
-
 with open('comment_template.txt') as f:
   comment_template = f.read()
 
@@ -23,7 +22,7 @@ def reply(r, comment):
 
 def run():
   no_context = [ '/r/nocontext' ]
-  banned_subreddits = [ 'wishlist' ]
+  banned_subreddits = [ 'wishlist', 'cringepics' ]
   r = login.init()
   my_id = login.my_id(r)
   while True:
