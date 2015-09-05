@@ -45,4 +45,4 @@ while True:
   try:
     run()
   except:
-    print '[posting] ', sys.exec_info()[0]
+    print '[posting] ', sys.exc_info()[0]

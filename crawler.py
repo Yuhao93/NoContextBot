@@ -26,4 +26,4 @@ while True:
   try:
     run()
   except:
-    print '[crawler] ', sys.exec_info()[0]
+    print '[crawler] ', sys.exc_info()[0]
