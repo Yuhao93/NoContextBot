@@ -22,7 +22,7 @@ def reply(r, comment):
 
 def run():
   no_context = [ '/r/nocontext' ]
-  banned_subreddits = [ 'wishlist', 'cringepics' ]
+  banned_subreddits = [ 'wishlist', 'cringepics', 'askreddit' ]
   r = login.init()
   my_id = login.my_id(r)
   while True:
