@@ -25,4 +25,7 @@ def run():
       login.refresh_praw(r)
 
 while True:
-  run()
+  try:
+    run()
+  except:
+    print '[blacklister] ', sys.exc_info()[0]
