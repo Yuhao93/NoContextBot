@@ -15,6 +15,7 @@ db = client[db_name]
 db.authenticate(username, password)
 collection = db['comments']
 replies = db['replies']
+blacklist = db['blacklist']
 
 def insert_if_not_exists(comment_id, text):
   if not exists(comment_id):
@@ -41,5 +42,14 @@ def random_comment():
   randomNumber = random.randint(0, cnt - 1)
   return collection.find().limit(-1).skip(randomNumber).next()
 
+def is_blacklisted(user_id):
+  return not blacklist.find_one({
+    "user_id": user_id
+  }) is None
 
 
+def blacklist_user(user_id):
+  if not is_blacklisted(user_id):
+    blacklist.insert_one({
+      "user_id": user_id
+    })
