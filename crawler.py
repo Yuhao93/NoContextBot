@@ -27,10 +27,6 @@ def reply(r, comment):
 
 def run():
   no_context = [ '/r/nocontext' ]
-  banned_subreddits = [ \
-    'wishlist', 'cringepics', 'askreddit', 'wowthissubexists', \
-    'pics', 'european', 'gaming', 'blackpeopletwitter' \
-  ]
   r = login.init()
   my_id = login.my_id(r)
   while True:
@@ -45,7 +41,7 @@ def run():
             db.insert_if_not_exists(parent.id, parent_text)
         
         subreddit = comment.subreddit.display_name.lower()
-        if subreddit in banned_subreddits:
+        if db.is_banned(subreddit):
           continue
         if text in no_context \
             and not comment.is_root \
