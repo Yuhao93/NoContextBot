@@ -2,6 +2,7 @@ import db
 import login
 import praw
 import sys
+import traceback
 import util
 
 with open('comment_template.txt') as f:
@@ -58,4 +59,4 @@ while True:
   try:
     run()
   except:
-    print '[crawler] ', sys.exc_info()[0]
+    traceback.print_exc()

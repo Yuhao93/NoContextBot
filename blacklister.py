@@ -3,6 +3,7 @@ import login
 import praw
 import sys
 import time
+import traceback
 import re
 
 def run():
@@ -33,4 +34,4 @@ while True:
   try:
     run()
   except:
-    print '[blacklister] ', sys.exc_info()[0]
+    traceback.print_exc()
