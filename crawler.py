@@ -16,10 +16,11 @@ def reply(r, comment):
   while random_comment['comment_id'] == util.parent(r, comment).id:
     random_comment = db.random_comment()
   thing_id = "t1_" + random_comment['comment_id']
-  parent_comment = util.parent(r, r.get_info(thing_id=thing_id))
+  context_comment = r.get_info(thing_id=thing_id)
+  parent_comment = util.parent(r, context_comment)
   url = parent_comment.permalink
   nsfw = ""
-  if parent_comment.submission.over_18:
+  if context_comment.submission.over_18:
     nsfw = " [NSFW]"
   text = comment_template.format(wrap_comment(random_comment['text']), nsfw, \
       url)
